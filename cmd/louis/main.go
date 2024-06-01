@@ -58,7 +58,7 @@ func main() {
 		log.Fatal(err)
 	}
 
-	// if -> output
+	// ir -> output
 	outN, err := l.Transpilers[outputLang].Specialize(irN)
 	if err != nil {
 		log.Fatal(err)
