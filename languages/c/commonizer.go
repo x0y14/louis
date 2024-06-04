@@ -2,12 +2,11 @@ package c
 
 import (
 	"louis/interfaces"
-	"louis/languages/ir"
 )
 
 type Commonizer struct {
 }
 
-func (c *Commonizer) Commonize(n interfaces.Node) (*ir.Node, error) {
+func (c *Commonizer) Commonize(n interfaces.Node) (interfaces.Node, error) {
 	return nil, nil
 }
