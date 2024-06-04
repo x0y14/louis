@@ -1,7 +1,5 @@
 package interfaces
 
-import "louis/languages/ir"
-
 type Commonizer interface {
-	Commonize(n Node) (*ir.Node, error)
+	Commonize(n Node) (Node, error)
 }
