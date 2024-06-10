@@ -10,92 +10,85 @@ type TokenKind int
 
 func (t TokenKind) String() string {
 	k := [...]string{
-		ILLEGAL: "ILLEGAL",
-		EOF:     "EOF",
-		COMMENT: "COMMENT",
+		TK_ILLEGAL: "ILLEGAL",
+		TK_EOF:     "EOF",
+		TK_COMMENT: "COMMENT",
 
-		IDENT:  "IDENT",
-		INT:    "INT",
-		FLOAT:  "FLOAT",
-		CHAR:   "CHAR",
-		STRING: "STRING",
+		TK_IDENT:  "IDENT",
+		TK_INT:    "INT",
+		TK_FLOAT:  "FLOAT",
+		TK_CHAR:   "CHAR",
+		TK_STRING: "STRING",
 
-		ADD: "+",
-		SUB: "-",
-		MUL: "*",
-		DIV: "/",
-		MOD: "%",
+		TK_ADD: "+",
+		TK_SUB: "-",
+		TK_MUL: "*",
+		TK_DIV: "/",
+		TK_MOD: "%",
 
-		EQL:    "==",
-		LSS:    "<",
-		GTR:    ">",
-		ASSIGN: "=",
-		NOT:    "!",
+		TK_EQL:    "==",
+		TK_LSS:    "<",
+		TK_GTR:    ">",
+		TK_ASSIGN: "=",
+		TK_NOT:    "!",
 
-		NEQ: "!=",
-		LEQ: "<=",
-		GEQ: ">=",
+		TK_NEQ: "!=",
+		TK_LEQ: "<=",
+		TK_GEQ: ">=",
 
-		LAND: "&&",
-		LOR:  "||",
+		TK_LAND: "&&",
+		TK_LOR:  "||",
 
-		LRB: "(",
-		LSB: "[",
-		LCB: "{",
-		RRB: ")",
-		RSB: "]",
-		RCB: "}",
+		TK_LRB: "(",
+		TK_LSB: "[",
+		TK_LCB: "{",
+		TK_RRB: ")",
+		TK_RSB: "]",
+		TK_RCB: "}",
 
-		DOT:   ".",
-		COMMA: ",",
-		COLON: ":",
-		SEMI:  ";",
+		TK_DOT:   ".",
+		TK_COMMA: ",",
+		TK_COLON: ":",
+		TK_SEMI:  ";",
 	}
 	return k[t]
 }
 
 // 参考: [Golang](https://github.com/golang/go/blob/master/src/go/token/token.go)
 const (
-	ILLEGAL TokenKind = iota
-	EOF
-	COMMENT
-
-	IDENT  // i
-	INT    // 1
-	FLOAT  // 1.2
-	CHAR   // 'a'
-	STRING // "abc"
-
-	ADD // +
-	SUB // -
-	MUL // *
-	DIV // /
-	MOD // %
-
-	EQL    // ==
-	LSS    // <
-	GTR    // >
-	ASSIGN // =
-	NOT    // !
-
-	NEQ // !=
-	LEQ // <=
-	GEQ // >=
-
-	LAND // &&
-	LOR  // ||
-
-	LRB // (
-	LSB // [
-	LCB // {
-	RRB // )
-	RSB // ]
-	RCB // }
-
-	DOT   // .
-	COMMA // ,
-	COLON // :
-	SEMI  // ;
+	TK_ILLEGAL TokenKind = iota
+	TK_EOF
+	TK_COMMENT
+	TK_IDENT  // i
+	TK_INT    // 1
+	TK_FLOAT  // 1.2
+	TK_CHAR   // 'a'
+	TK_STRING // "abc"
+	TK_ADD    // +
+	TK_SUB    // -
+	TK_MUL    // *
+	TK_DIV    // /
+	TK_MOD    // %
+	TK_EQL    // ==
+	TK_LSS    // <
+	TK_GTR    // >
+	TK_ASSIGN // =
+	TK_NOT    // !
+	TK_NEQ    // !=
+	TK_LEQ    // <=
+	TK_GEQ    // >=
+	TK_LAND   // &&
+	TK_LOR    // ||
+	TK_LRB    // (
+	TK_LSB    // [
+	TK_LCB    // {
+	TK_RRB    // )
+	TK_RSB    // ]
+	TK_RCB    // }
+	TK_DOT    // .
+	TK_COMMA  // ,
+	TK_COLON  // :
+	TK_SEMI   // ;
 )
 
 type Token struct {
@@ -121,37 +114,37 @@ func (t *Token) GetNext() interfaces.Token {
 
 func symbolToTokenKind(s string) (TokenKind, bool) {
 	k := map[string]TokenKind{
-		"==": EQL,
+		"==": TK_EQL,
 
-		"!=": NEQ,
-		"<=": LEQ,
-		">=": GEQ,
+		"!=": TK_NEQ,
+		"<=": TK_LEQ,
+		">=": TK_GEQ,
 
-		"&&": LAND,
-		"||": LOR,
+		"&&": TK_LAND,
+		"||": TK_LOR,
 
-		"+": ADD,
-		"-": SUB,
-		"*": MUL,
-		"/": DIV,
-		"%": MOD,
+		"+": TK_ADD,
+		"-": TK_SUB,
+		"*": TK_MUL,
+		"/": TK_DIV,
+		"%": TK_MOD,
 
-		"<": LSS,
-		">": GTR,
-		"=": ASSIGN,
-		"!": NOT,
+		"<": TK_LSS,
+		">": TK_GTR,
+		"=": TK_ASSIGN,
+		"!": TK_NOT,
 
-		"(": LRB,
-		"[": LSB,
-		"{": LCB,
-		")": RRB,
-		"]": RSB,
-		"}": RCB,
+		"(": TK_LRB,
+		"[": TK_LSB,
+		"{": TK_LCB,
+		")": TK_RRB,
+		"]": TK_RSB,
+		"}": TK_RCB,
 
-		".": DOT,
-		",": COMMA,
-		":": COLON,
-		";": SEMI,
+		".": TK_DOT,
+		",": TK_COMMA,
+		":": TK_COLON,
+		";": TK_SEMI,
 	}
 
 	v, ok := k[s]
@@ -162,7 +155,7 @@ func numericTokenKind(num []rune) (TokenKind, bool) {
 	// パースできるか? / 数値として正しいか?
 	_, err := strconv.ParseFloat(string(num), 64)
 	if err != nil {
-		return ILLEGAL, false
+		return TK_ILLEGAL, false
 	}
 
 	// dotが含まれるか?
@@ -174,7 +167,7 @@ func numericTokenKind(num []rune) (TokenKind, bool) {
 		}
 	}
 	if isIncludeDot {
-		return FLOAT, true
+		return TK_FLOAT, true
 	}
-	return INT, true
+	return TK_INT, true
 }

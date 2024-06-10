@@ -99,15 +99,15 @@ func (t *Tokenizer) isSingleSymbol() bool {
 	}
 
 	switch string(*cr) {
-	case ADD.String(), SUB.String(), MUL.String(), DIV.String(), MOD.String():
+	case TK_ADD.String(), TK_SUB.String(), TK_MUL.String(), TK_DIV.String(), TK_MOD.String():
 		return true
-	case LSS.String(), GTR.String(), ASSIGN.String(), NOT.String():
+	case TK_LSS.String(), TK_GTR.String(), TK_ASSIGN.String(), TK_NOT.String():
 		return true
-	case LRB.String(), LSB.String(), LCB.String():
+	case TK_LRB.String(), TK_LSB.String(), TK_LCB.String():
 		return true
-	case RRB.String(), RSB.String(), RCB.String():
+	case TK_RRB.String(), TK_RSB.String(), TK_RCB.String():
 		return true
-	case DOT.String(), COMMA.String(), COLON.String(), SEMI.String():
+	case TK_DOT.String(), TK_COMMA.String(), TK_COLON.String(), TK_SEMI.String():
 		return true
 	default:
 		return false
@@ -124,11 +124,11 @@ func (t *Tokenizer) isCompoundSymbol() bool {
 		return false
 	}
 	switch string(*cr) + string(*nr) {
-	case EQL.String():
+	case TK_EQL.String():
 		return true
-	case NEQ.String(), LEQ.String(), GEQ.String():
+	case TK_NEQ.String(), TK_LEQ.String(), TK_GEQ.String():
 		return true
-	case LAND.String(), LOR.String():
+	case TK_LAND.String(), TK_LOR.String():
 		return true
 	default:
 		return false
@@ -322,7 +322,7 @@ func (t *Tokenizer) Tokenize(s string) (interfaces.Token, error) {
 			if err != nil {
 				return nil, err
 			}
-			tok := &Token{Kind: STRING, s: string(str)}
+			tok := &Token{Kind: TK_STRING, s: string(str)}
 			curt.Next = tok
 			curt = tok
 		// number
@@ -336,12 +336,12 @@ func (t *Tokenizer) Tokenize(s string) (interfaces.Token, error) {
 				return nil, fmt.Errorf("invalid numeric value: %s", string(num))
 			}
 			var tok *Token
-			if tokType == FLOAT {
+			if tokType == TK_FLOAT {
 				f, _ := strconv.ParseFloat(string(num), 64)
-				tok = &Token{Kind: FLOAT, f: f}
+				tok = &Token{Kind: TK_FLOAT, f: f}
 			} else {
 				i, _ := strconv.Atoi(string(num))
-				tok = &Token{Kind: INT, i: i}
+				tok = &Token{Kind: TK_INT, i: i}
 			}
 			curt.Next = tok
 			curt = tok
@@ -351,7 +351,7 @@ func (t *Tokenizer) Tokenize(s string) (interfaces.Token, error) {
 			if err != nil {
 				return nil, err
 			}
-			tok := &Token{Kind: IDENT, s: string(ident)}
+			tok := &Token{Kind: TK_IDENT, s: string(ident)}
 			curt.Next = tok
 			curt = tok
 		default:
@@ -360,7 +360,7 @@ func (t *Tokenizer) Tokenize(s string) (interfaces.Token, error) {
 		}
 	}
 
-	tok := &Token{Kind: EOF}
+	tok := &Token{Kind: TK_EOF}
 	curt.Next = tok
 	curt = tok
 

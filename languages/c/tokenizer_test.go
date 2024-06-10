@@ -14,7 +14,7 @@ func TestTokenizer_Tokenize(t *testing.T) {
 	}
 	for {
 		fmt.Println(tok.String())
-		if tok.GetKind() == EOF {
+		if tok.GetKind() == TK_EOF {
 			break
 		}
 		tok = tok.GetNext()
