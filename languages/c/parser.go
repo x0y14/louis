@@ -254,5 +254,9 @@ func (p *Parser) Parse(t interfaces.Token) (interfaces.Node, error) {
 		curt = n
 	}
 
+	terminal := &Node{Kind: ND_TERMINAL}
+	curt.Next = terminal
+	curt = terminal
+
 	return head.Next, nil
 }

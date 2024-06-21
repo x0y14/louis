@@ -39,6 +39,7 @@ const (
 	ND_LIT_NULL
 	ND_CALL
 	ND_ARGS
+	ND_TERMINAL
 )
 
 func (n NodeKind) String() string {
@@ -74,6 +75,7 @@ func (n NodeKind) String() string {
 		ND_LIT_NULL:      "LIT_NULL",
 		ND_CALL:          "CALL",
 		ND_ARGS:          "ARGS",
+		ND_TERMINAL:      "TERMINAL",
 	}
 	return k[n]
 }
