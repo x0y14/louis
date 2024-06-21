@@ -1,7 +1,17 @@
 package ir
 
-type Literal int
+type LiteralType interface {
+	int | float64 | string
+}
 
-func (l Literal) String() string {
+type Literal[T LiteralType] struct {
+	Data T
+}
+
+func (l *Literal[T]) GetData() T {
+	return l.Data
+}
+
+func (l *Literal[T]) String() string {
 	return ""
 }
